@@ -1,0 +1,14 @@
+CREATE PROCEDURE [dbo].[sp_bulk_insert] 
+	@file_path varchar(max),
+	@table_name sysname
+AS
+
+BEGIN
+
+	SET NOCOUNT ON;
+
+	Declare @SQL nvarchar(max) =''
+	SET @SQL = N'BULK INSERT '+ @table_name + ' FROM ' + @file_path + ' WITH (FIELDTERMINATOR = "\t", ROWTERMINATOR = "\n")'
+	EXEC sp_executesql @SQL;
+
+END

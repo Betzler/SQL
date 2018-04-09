@@ -1,0 +1,16 @@
+--Procedure to clone table
+CREATE PROCEDURE sp_clone_table
+
+	@base_table sysname,
+	@cloned_table sysname
+	
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+	DECLARE @SQL nvarchar(max) = ''
+	SET @SQL = N'SELECT * INTO ' + @cloned_table + ' FROM ' + @base_table + ';';
+	EXEC sp_executesql @SQL;
+
+END
+GO
